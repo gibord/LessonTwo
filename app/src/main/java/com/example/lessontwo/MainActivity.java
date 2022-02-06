@@ -1,5 +1,6 @@
 package com.example.lessontwo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -17,10 +18,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setListeners();
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("One", One);
+        outState.putInt("Two", Two);
+
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        One = savedInstanceState.getInt("One");
+        Two = savedInstanceState.getInt("Two");
+        textInput.setText(String.format("%d", One, Two));
+
+
+    }
+
     public void onClick(View view) {
         switch (view.getId()) {
             case (R.id.buttonOne): {
-                textInput.setText(String.format("%d", One ));
+                textInput.setText(String.format("%d", One));
                 break;
             }
             case (R.id.buttonTwo): {
@@ -60,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case (R.id.buttonEleven): {
-                textInput.setText( Eleven);
+                textInput.setText(Eleven);
                 break;
             }
             case (R.id.buttonTwelve): {
